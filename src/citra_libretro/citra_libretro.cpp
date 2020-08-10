@@ -1,4 +1,4 @@
-// Copyright 2017 Citra Emulator Project
+﻿// Copyright 2017 Citra Emulator Project
 // Licensed under GPLv2 or any later version
 // Refer to the license.txt file included.
 
@@ -87,27 +87,27 @@ unsigned retro_api_version() {
 
 void LibRetro::OnConfigureEnvironment() {
     static const retro_variable values[] = {
-        {"citra_use_cpu_jit", "Enable CPU JIT; enabled|disabled"},
-        {"citra_use_hw_renderer", "Enable hardware renderer; enabled|disabled"},
-        {"citra_use_shader_jit", "Enable shader JIT; enabled|disabled"},
-        {"citra_use_hw_shaders", "Enable hardware shaders; enabled|disabled"},
-        {"citra_use_acc_geo_shaders", "Enable accurate geometry shaders (only for H/W shaders); enabled|disabled"},
-        {"citra_use_acc_mul", "Enable accurate shaders multiplication (only for H/W shaders); enabled|disabled"},
+        {"citra_use_cpu_jit", "CPU即时编译; enabled|disabled"},
+        {"citra_use_hw_renderer", "硬件渲染器; enabled|disabled"},
+        {"citra_use_shader_jit", "着色器即时编译; enabled|disabled"},
+        {"citra_use_hw_shaders", "硬件着色器; enabled|disabled"},
+        {"citra_use_acc_geo_shaders", "精确几何着色器（只对硬件着色器）; enabled|disabled"},
+        {"citra_use_acc_mul", "精确着色器乘法（只对硬件着色器）; enabled|disabled"},
         {"citra_resolution_factor",
-         "Resolution scale factor; 1x (Native)|2x|3x|4x|5x|6x|7x|8x|9x|10x"},
-        {"citra_layout_option", "Screen layout positioning; Default Top-Bottom Screen|Single "
-                                "Screen Only|Large Screen, Small Screen|Side by Side"},
-        {"citra_swap_screen", "Prominent 3DS screen; Top|Bottom"},
+         "分辨率缩放; 1x (原始)|2x|3x|4x|5x|6x|7x|8x|9x|10x"},
+        {"citra_layout_option", "屏幕位置布局; 缺省顶部-底部屏幕|单个"
+                                "屏幕|大屏幕，小屏幕|横向并排屏幕"},
+        {"citra_swap_screen", "首要3DS屏幕; 顶部|底部"},
         {"citra_analog_function",
-         "Right analog function; C-Stick and Touchscreen Pointer|Touchscreen Pointer|C-Stick"},
-        {"citra_deadzone", "Emulated pointer deadzone (%); 15|20|25|30|35|0|5|10"},
-        {"citra_mouse_touchscreen", "Enable mouse input for touchscreen; enabled|disabled"},
-        {"citra_use_virtual_sd", "Enable virtual SD card; enabled|disabled"},
-        {"citra_use_libretro_save_path", "Savegame location; LibRetro Default|Citra Default"},
-        {"citra_is_new_3ds", "3DS system model; Old 3DS|New 3DS"},
+         "右摇杆功能; C-摇杆和触摸屏指针|触摸屏指针|C-摇杆"},
+        {"citra_deadzone", "模拟指针死区(%); 15|20|25|30|35|0|5|10"},
+        {"citra_mouse_touchscreen", "鼠标输入模拟触摸屏; enabled|disabled"},
+        {"citra_use_virtual_sd", "虚拟SD卡; enabled|disabled"},
+        {"citra_use_libretro_save_path", "游戏存档位置; RetroArch缺省位置|Citra缺省位置"},
+        {"citra_is_new_3ds", "3DS系统型号; 老3DS|新3DS"},
         {"citra_region_value",
-         "3DS system region; Auto|Japan|USA|Europe|Australia|China|Korea|Taiwan"},
-        {"citra_use_gdbstub", "Enable GDB stub; disabled|enabled"},
+         "3DS系统区域; 自动|日本|美国|欧洲|澳大利亚|中国|韩国|台湾"},
+        {"citra_use_gdbstub", "GDB调试; disabled|enabled"},
         {nullptr, nullptr}};
 
     LibRetro::SetVariables(values);
@@ -133,10 +133,10 @@ uintptr_t LibRetro::GetFramebuffer() {
  */
 void UpdateSettings() {
     struct retro_input_descriptor desc[] = {
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT, "Left"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP, "Up"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN, "Down"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "Right"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT, "左"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP, "上"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN, "下"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "右"},
         {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_X, "X"},
         {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_Y, "Y"},
         {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_B, "B"},
@@ -145,10 +145,10 @@ void UpdateSettings() {
         {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L2, "ZL"},
         {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R, "R"},
         {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R2, "ZR"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "Start"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "Select"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L3, "Home"},
-        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R3, "Touch Screen Touch"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "开始"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "选择"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_L3, "主页键"},
+        {0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_R3, "触摸屏"},
         {0, 0},
     };
 
@@ -181,15 +181,15 @@ void UpdateSettings() {
     Settings::values.use_virtual_sd =
         LibRetro::FetchVariable("citra_use_virtual_sd", "enabled") == "enabled";
     Settings::values.is_new_3ds =
-        LibRetro::FetchVariable("citra_is_new_3ds", "Old 3DS") == "New 3DS";
-    Settings::values.swap_screen = LibRetro::FetchVariable("citra_swap_screen", "Top") == "Bottom";
+        LibRetro::FetchVariable("citra_is_new_3ds", "老3DS") == "新3DS";
+    Settings::values.swap_screen = LibRetro::FetchVariable("citra_swap_screen", "顶部") == "底部";
     Settings::values.use_gdbstub =
         LibRetro::FetchVariable("citra_use_gdbstub", "disabled") == "enabled";
     LibRetro::settings.mouse_touchscreen =
         LibRetro::FetchVariable("citra_mouse_touchscreen", "enabled") == "enabled";
 
     // These values are a bit more hard to define, unfortunately.
-    auto scaling = LibRetro::FetchVariable("citra_resolution_factor", "1x (Native)");
+    auto scaling = LibRetro::FetchVariable("citra_resolution_factor", "1x (原始)");
     auto endOfScale = scaling.find('x'); // All before 'x' in "_x ...", e.g "1x (Native)"
     if (endOfScale == std::string::npos) {
         LOG_ERROR(Frontend, "Failed to parse resolution scale!");
@@ -199,15 +199,15 @@ void UpdateSettings() {
         Settings::values.resolution_factor = scale;
     }
 
-    auto layout = LibRetro::FetchVariable("citra_layout_option", "Default Top-Bottom Screen");
+    auto layout = LibRetro::FetchVariable("citra_layout_option", "缺省顶部-底部屏幕");
 
-    if (layout == "Default Top-Bottom Screen") {
+    if (layout == "缺省顶部-底部屏幕") {
         Settings::values.layout_option = Settings::LayoutOption::Default;
-    } else if (layout == "Single Screen Only") {
+    } else if (layout == "单个屏幕") {
         Settings::values.layout_option = Settings::LayoutOption::SingleScreen;
-    } else if (layout == "Large Screen, Small Screen") {
+    } else if (layout == "大屏幕，小屏幕") {
         Settings::values.layout_option = Settings::LayoutOption::LargeScreen;
-    } else if (layout == "Side by Side") {
+    } else if (layout == "横向并排屏幕") {
         Settings::values.layout_option = Settings::LayoutOption::SideScreen;
     } else {
         LOG_ERROR(Frontend, "Unknown layout type: {}.", layout);
@@ -218,29 +218,29 @@ void UpdateSettings() {
     LibRetro::settings.deadzone = (float)std::stoi(deadzone) / 100;
 
     auto analog_function =
-        LibRetro::FetchVariable("citra_analog_function", "C-Stick and Touchscreen Pointer");
+        LibRetro::FetchVariable("citra_analog_function", "C-摇杆和触摸屏指针");
 
-    if (analog_function == "C-Stick and Touchscreen Pointer") {
+    if (analog_function == "C-摇杆和触摸屏指针") {
         LibRetro::settings.analog_function = LibRetro::CStickFunction::Both;
-    } else if (analog_function == "C-Stick") {
+    } else if (analog_function == "C-摇杆") {
         LibRetro::settings.analog_function = LibRetro::CStickFunction::CStick;
-    } else if (analog_function == "Touchscreen Pointer") {
+    } else if (analog_function == "触摸屏指针") {
         LibRetro::settings.analog_function = LibRetro::CStickFunction::Touchscreen;
     } else {
         LOG_ERROR(Frontend, "Unknown right analog function: {}.", analog_function);
         LibRetro::settings.analog_function = LibRetro::CStickFunction::Both;
     }
 
-    auto region = LibRetro::FetchVariable("citra_region_value", "Auto");
+    auto region = LibRetro::FetchVariable("citra_region_value", "自动");
     std::map<std::string, int> region_values;
-    region_values["Auto"] = -1;
-    region_values["Japan"] = 0;
-    region_values["USA"] = 1;
-    region_values["Europe"] = 2;
-    region_values["Australia"] = 3;
-    region_values["China"] = 4;
-    region_values["Korea"] = 5;
-    region_values["Taiwan"] = 6;
+    region_values["自动"] = -1;
+    region_values["日本"] = 0;
+    region_values["美国"] = 1;
+    region_values["欧洲"] = 2;
+    region_values["澳大利亚"] = 3;
+    region_values["中国"] = 4;
+    region_values["韩国"] = 5;
+    region_values["台湾"] = 6;
 
     auto result = region_values.find(region);
     if (result == region_values.end()) {
@@ -296,7 +296,7 @@ void UpdateSettings() {
 
     // Configure the file storage location
     auto use_libretro_saves = LibRetro::FetchVariable("citra_use_libretro_save_path",
-                                                      "LibRetro Default") == "LibRetro Default";
+                                                      "RetroArch缺省位置") == "RetroArch缺省位置";
 
     if (use_libretro_saves) {
         auto target_dir = LibRetro::GetSaveDir();
