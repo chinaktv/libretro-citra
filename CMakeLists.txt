@@ -136,6 +136,8 @@ else()
     add_definitions(/DNOMINMAX)
     # Avoid windows.h from including some usually unused libs like winsocks.h, since this might cause some redefinition errors.
     add_definitions(/DWIN32_LEAN_AND_MEAN)
+    # Use UNICODE instead of MBCS
+    add_definitions(/D_UNICODE /DUNICODE)
 
     set(CMAKE_CONFIGURATION_TYPES Debug Release CACHE STRING "" FORCE)
 
@@ -149,7 +151,7 @@ else()
     # /Zi - Output debugging information
     # /Zo - enhanced debug info for optimized builds
     # /permissive- - enables stricter C++ standards conformance checks
-    set(CMAKE_C_FLAGS   "/W3 /MP /Zi /Zo /permissive-" CACHE STRING "" FORCE)
+    set(CMAKE_C_FLAGS   "/utf-8 /W3 /MP /Zi /Zo /permissive-" CACHE STRING "" FORCE)
     # /EHsc - C++-only exception handling semantics
     # /std:c++latest - Latest available C++ standard
     # /Zc:throwingNew - let codegen assume `operator new` will never return null
